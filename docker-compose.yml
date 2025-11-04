@@ -1,0 +1,55 @@
+# A versão do Docker Compose que estamos usando
+version: '3.8'
+
+# Aqui listamos todos os "serviços" (contêineres)
+services:
+
+  # 1. O serviço da nossa aplicação Java
+  app:
+    # Em vez de 'image:', usamos 'build:'.
+    # Isso diz ao Compose para construir a imagem usando o Dockerfile
+    # que está no diretório atual ('.')
+    build: .
+    
+    # O nome que queremos para o contêiner
+    container_name: minha-aplicacao-java
+    
+    # Mapeia a porta 8080 da sua máquina para a 8080 do contêiner
+    ports:
+      - "8080:8080"
+      
+    # Faz este serviço 'app' esperar até que o serviço 'db'
+    # esteja pronto (saudável) antes de iniciar
+    depends_on:
+      - db
+
+  # 2. O serviço do nosso Banco de Dados
+  db:
+    # Usamos uma imagem pronta oficial do PostgreSQL
+    image: postgres:14-alpine
+    
+    # O nome que queremos para o contêiner
+    container_name: meu-banco-postgres
+    
+    # "Variáveis de Ambiente" para configurar o banco
+    # IMPORTANTE: Mude essas senhas!
+    environment:
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=senhaforte
+      - POSTGRES_DB=minha_app_db
+      
+    # Mapeia a porta 5432 da sua máquina para a 5432 do contêiner
+    # Isso é opcional, mas permite que você acesse o banco
+    # de fora (com DBeaver, etc)
+    ports:
+      - "5432:5432"
+      
+    # 'Volumes': Isso é MUITO importante.
+    # Garante que os dados do banco sejam salvos em seu HD
+    # e não desapareçam se o contêiner for removido.
+    volumes:
+      - dados_do_banco:/var/lib/postgresql/data
+
+# Define o volume que usamos acima
+volumes:
+  dados_do_banco:

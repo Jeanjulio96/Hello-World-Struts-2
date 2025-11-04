@@ -1,0 +1,79 @@
+<!DOCTYPE validators PUBLIC
+    "-//Apache Struts//XWork Validator 1.0.3//EN"
+    "http://struts.apache.org/dtds/xwork-validator-1.0.3.dtd">
+<validators>
+    <field name="aporteRequest.emailParticipante">
+        <field-validator type="requiredstring">
+            <message>O e-mail é obrigatório.</message>
+        </field-validator>
+        <field-validator type="email">
+            <message>O formato do e-mail é inválido.</message>
+        </field-validator>
+    </field>
+
+    <field name="aporteRequest.numTelefone">
+        <field-validator type="requiredstring">
+            <message>O celular é obrigatório.</message>
+        </field-validator>
+        <field-validator type="regex">
+            <param name="expression"><![CDATA[\(\d{2}\)\s9\d{4}\s\d{4}]]></param>
+            <message>O formato do celular deve ser (XX) 9XXXX XXXX.</message>
+        </field-validator>
+    </field>
+
+  <field name="aporteRequest.logradouro">
+    <field-validator type="requiredstring">
+        <param name="trim">true</param>
+        <message>O logradouro é obrigatório.</message>
+    </field-validator>
+    <field-validator type="stringlength">
+        <param name="maxLength">40</param>
+        <message>O logradouro não pode exceder 40 caracteres.</message>
+    </field-validator>
+    <field-validator type="regex">
+        <param name="expression"><![CDATA[^[a-zA-Z0-9ãÃáÁàÀâÂéÉêÊíÍóÓôÔõÕúÚçÇ\s\-\.]+$]]></param>
+        <message>O logradouro deve conter apenas letras, números, espaços, hífen e ponto.</message>
+    </field-validator>
+    <!-- Validação adicional para prevenir caracteres perigosos -->
+    <field-validator type="regex">
+        <param name="expression"><![CDATA[^(?!.*[<>/\\&"'`=;(){}[\]|*+?^$]).*$]]></param>
+        <message>O logradouro contém caracteres não permitidos.</message>
+    </field-validator>
+</field>
+
+    <field name="aporteRequest.bairro">
+        <field-validator type="requiredstring"><message>O bairro é obrigatório.</message></field-validator>
+        <field-validator type="stringlength">
+            <param name="maxLength">20</param>
+            <message>O bairro não pode exceder ${maxLength} caracteres.</message>
+        </field-validator>
+        <field-validator type="regex">
+            <param name="expression"><![CDATA[^[a-zA-ZÀ-ÿ0-9\s\.,\-]+$]]></param>
+            <message>O bairro deve conter apenas letras, números, espaços e caracteres válidos (. , -).</message>
+        </field-validator>
+    </field>
+    
+    <field name="aporteRequest.municipio">
+        <field-validator type="requiredstring"><message>A cidade é obrigatória.</message></field-validator>
+        <field-validator type="stringlength">
+            <param name="maxLength">30</param>
+            <message>A cidade não pode exceder ${maxLength} caracteres.</message>
+        </field-validator>
+        <field-validator type="regex">
+            <param name="expression"><![CDATA[^[a-zA-ZÀ-ÿ\s\-]+$]]></param>
+            <message>A cidade deve conter apenas letras, espaços e hífens.</message>
+        </field-validator>
+    </field>
+    
+    <field name="aporteRequest.complementoParticipante">
+        <field-validator type="stringlength">
+            <param name="maxLength">15</param>
+            <message>O complemento não pode exceder ${maxLength} caracteres.</message>
+        </field-validator>
+        <field-validator type="regex">
+            <param name="expression"><![CDATA[^[a-zA-ZÀ-ÿ0-9\s\.,\-º°ª]*$]]></param>
+            <message>O complemento deve conter apenas letras, números, espaços e caracteres válidos (. , - º ° ª).</message>
+        </field-validator>
+    </field>
+
+</validators>

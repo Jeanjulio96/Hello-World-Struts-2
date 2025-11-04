@@ -1,20 +1,21 @@
-<%@ page language = "java" contentType = "text/html; charset = ISO-8859-1"
-   pageEncoding = "ISO-8859-1"%>
-<%@ taglib prefix = "s" uri = "/struts-tags"%>
-   <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" 
-"http://www.w3.org/TR/html4/loose.dtd">
-
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="s" uri="/struts-tags" %>
+<!DOCTYPE html>
 <html>
-   <head>
-      <title>Hello World</title>
-   </head>
-   
-   <body>
-      <h1>Hello World From Struts2</h1>
-      <form action = "hello">
-         <label for = "name">Please enter your name</label><br/>
-         <input type = "text" name = "name"/>
-         <input type = "submit" value = "Say Hello"/>
-      </form>
-   </body>
+<head>
+    <title>Início - Aporte Previdência</title>
+    <style>
+        body { font-family: sans-serif; padding: 20px; }
+        a { font-size: 1.2em; }
+    </style>
+</head>
+<body>
+    <h1>Página Inicial</h1>
+    <p>Bem-vindo ao mock do sistema de Aporte de Previdência.</p>
+    <p>
+        <a href="<s:url action='exibirDadosCadastrais'/>">
+            Iniciar Aporte (Preencher Dados Cadastrais)
+        </a>
+    </p>
+</body>
 </html>
